@@ -1,4 +1,4 @@
-# Newt-PostgreSQL-1
+
 # H1
 ## H2
 ### H3
@@ -18,11 +18,11 @@
 - Second item
 - Third item
 
-`code`
+`code back-quote or grave accent`
 
 ---
 
-[title](https://www.example.com)
+[link](https://www.example.com)
 
 ![alt text](image.jpg)
 
@@ -57,7 +57,7 @@ term
 - [ ] Contact the media
 
 
-That is so funny! :joy:
+That is so funny! :slightly_smiling_face:
 
 I need to highlight these ==very important words==.
 
