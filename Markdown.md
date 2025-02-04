@@ -6,8 +6,8 @@
 ##### H5
 
 
-** Bold **
-* Italic *
+**Bold**
+*Italic*
 > Block
 
 1. First item
