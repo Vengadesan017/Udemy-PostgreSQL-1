@@ -8,7 +8,7 @@
 # Create user
 
 - Create new user from Login/Groups Role
-- `CREATE ROLE vengadesan WITH
+- ```CREATE ROLE vengadesan WITH
 	LOGIN
 	NOSUPERUSER
 	CREATEDB
@@ -17,7 +17,7 @@
 	NOREPLICATION
 	NOBYPASSRLS
 	CONNECTION LIMIT -1
-	PASSWORD 'xxxxxx';`
+	PASSWORD 'xxxxxx';```
 
 # Create DB
 
