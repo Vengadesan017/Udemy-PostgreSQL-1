@@ -159,6 +159,51 @@ do
 	update set
 		a_no = EXCLUDED.a_no || 1
 ```
+# Alter table 
+```
+-- add column 
+ALTER table A
+ADD COLUMN temp varchar(200) NULL
+
+-- rename table
+alter table A
+rename to aa
+
+-- rename column
+alter table aa
+rename column temp to extra
+
+-- drop table
+alter table aa
+drop column extra
+
+-- change data type
+alter table aa 
+alter column temp type int
+using temp::integer
+
+alter table aa 
+alter column temp type varchar(10)
+
+-- set default
+alter table aa
+alter column temp set default 'x'
+
+-- add constraint like  PK , UNIQUE
+alter table aa  
+add constraint constraint_namee unique (temp)
+
+-- remove Constraint
+alter table aa 
+drop constraint constraint_namee
+
+-- set a column to accept the only difined allowed values
+alter table aa
+add column checking varchar(10)
+
+alter table aa
+add check (checking in ('Yes','No'))
+```
 
 # pgAdmin -propertices
 - use pgAdmin to create modify table
