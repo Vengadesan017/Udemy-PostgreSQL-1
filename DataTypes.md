@@ -132,7 +132,74 @@ values ('haii')
 
 create domain ven1 int not null check (Value > 10)
 create domain email varchar(150) null check (value ~* '^[A-Za-z0-9]+@[.][a-z]+$')
+
+
+--- Enum type
+create domain color varchar(100) null check(values in ('R' , 'B', 'G'))
+
+--- drop domain
+drop domain ven  -- error 
+
+drop domain ven cascade
+
 ```
+### composite data type
+- multiple data in single colum though the 
+```
+create type ventype as (
+fname varchar(255),
+lname varchar(255)
+)
+
+create table vent (
+id serial primary key,
+ventype ventype
+)
+
+insert into vent (ventype) values (row('First name','Last name'))
+
+select * from vent
+
+
+select (ventype).fname from vent
+
+select (vent.ventype).fname from vent
+
+
+-- enum
+create type currency as enum ('USD','INR')
+select 'USD'::currency
+
+create table vent (
+id serial primary key,
+currency currency
+)
+
+insert into vent (currency) values ('INR')
+
+-- drop
+drop type currency
+
+
+-- alter
+alter type currency rename to all_currency
+
+alter type currency owner to admin
+
+alter type currency set schema private
+
+alter type public.ventype add attibute name narvhar(255)
+
+
+-- default in enum
+
+create table dd (
+id serial,
+ddd currency default 'USD'
+```
+
+
+
 
 
 
