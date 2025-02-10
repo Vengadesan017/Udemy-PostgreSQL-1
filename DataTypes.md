@@ -110,8 +110,29 @@ select TIMEOFDAY()
 - insert a data like '[12,132,42]' , '{"key":"value"}' into jsonb (store as binary so easy to index , search)
 - select using -> , @>
 
-# Network address
+### Network address
 - cidr  - 7 to 19 bytes  - ipv4 and ipv6 newwork
 - inet  - 7 to 19 bytes  - ipv4 and ipv6 host and network
 - macaddr  - 6bytes  - Mac address
 - macaddr8  - 8 bytes  - Mac address (EUI- 64 format)
+
+# User defined data type
+### create domain nmae as data_type constraint
+- unique within a schema scope , can not reuse out side the scope but can reuse in multiple column
+```
+create domain ven varchar(100) null
+
+create table user_data_type (
+id serial primary key,
+name ven
+
+insert into user_data_type (name)
+values ('haii')
+)
+
+create domain ven1 int not null check (Value > 10)
+create domain email varchar(150) null check (value ~* '^[A-Za-z0-9]+@[.][a-z]+$')
+```
+
+
+
