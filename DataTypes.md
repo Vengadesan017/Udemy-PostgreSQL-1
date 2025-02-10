@@ -117,7 +117,8 @@ select TIMEOFDAY()
 - macaddr8  - 8 bytes  - Mac address (EUI- 64 format)
 
 # User defined data type
-### create domain nmae as data_type constraint
+### DOMAIN
+- create domain nmae as data_type constraint
 - unique within a schema scope , can not reuse out side the scope but can reuse in multiple column
 ```
 create domain ven varchar(100) null
@@ -143,7 +144,7 @@ drop domain ven  -- error
 drop domain ven cascade
 
 ```
-### composite data type
+### TYPE : composite data type
 - multiple data in single column
 ```
 create type ventype as (
