@@ -144,7 +144,7 @@ drop domain ven cascade
 
 ```
 ### composite data type
-- multiple data in single colum though the 
+- multiple data in single column
 ```
 create type ventype as (
 fname varchar(255),
