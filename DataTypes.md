@@ -203,4 +203,52 @@ ddd currency default 'USD'
 
 
 
+# sequence 
+- to find current sequence no. and move to next
+  ``` 
+  create sequence if not exists test_seq
+  create sequence test_seq
+  
+  select nextval('test_seq')  --iterate to next 
+  
+  select currval('test_seq')   -- show current value
+  
+  select setval('test_seq',100)    -- we can set or reset but default it takes as 1 only after using the nextval
+  
+  select setval('test_seq',100,false)    -- reset to new value when nextval is used
+  
+  select setval('test_seq',100,true)    -- reset to new value when setval applied
+  
+  create sequence if not exists text_seq start with 200
+  
+  alter sequence test_seq restart with 200
+  
+  alter sequence test_seq rename to new_seq
+  
+  -- multiple parameter
+  create sequence if not exists test_seq
+  increment 10
+  minvalue 500
+  maxvalue 600
+  start with 550
+  cycle                  -- descening
+
+  --- data type
+  create sequence if not exists test_seq as SMALLINT
+  
+  drop sequence test_seq
+
+  -- add to table
+  - create table without serial
+  - create sequence with start with 100 oqned by users2.user2_id
+  alter table tb_name alter column c1 set default nextval(test_seq)
+
+  -- share 1 seq to 2 table
+  - create 1 seq
+  - set default nextval('seq') in two columns
+
+  - set default ('id' || nextval('seq')) in two columns
+  ```
+
+
 
