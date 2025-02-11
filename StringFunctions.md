@@ -43,3 +43,17 @@ select ltrim('yyyyqywert','y')
 - case sensitive
 - ` select position('fd'in 'efesdsfddfd')   -7 `
 - ` select strpos('efesdsfddfd', 'fd') -7`
+
+### SUBSTRING
+- select a string from this based on the length not a index
+  ```
+   select substring('the main string 123123' from 5 for 6)
+  select substring('the main string 123123' for 6)
+  ```
+### REPEAT , REPLACE
+  ```
+   select repeat('the main string 123123' , 6)
+
+   select replace('the main string 123123' , 'the' ,'The')
+
+  ```
