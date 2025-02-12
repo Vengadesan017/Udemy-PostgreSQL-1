@@ -39,3 +39,16 @@
  - it contain sys tables , all build in data , function , operator
  - start with pg_ so reserved
  - ` select * from information_schema.schema: `
+ - list the table and column of different table
+   ```
+   select table_name , column_name from information_schema.columns c
+
+    select table_name , column_name , table_schema 
+    from information_schema.columns c
+    where c.table_schema = 'public'
+    order by 1   
+   
+   ```
+   - grand access to usage
+   - ` grand usage on schema schema_name  to username  `
+   - ` grand celect ao all tab;es in schema schema_name to user `
