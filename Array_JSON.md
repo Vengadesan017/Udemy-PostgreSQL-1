@@ -109,4 +109,65 @@ values
 
 ### array vs json
 - array - easy, less storage, indexing with gin so speed  but allow one data type
-- JSON - additional operators , support indexing 
+- JSON - additional operators , support indexing
+
+# JSON
+- it replace the xml. because it is to heavy to transfer
+- "name": "string" or number
+```
+select '{"name":"ven"}'::json
+select '{"name":" ven "}'::jsonb   - trims
+
+create table vv
+name json
+
+insert into vv (name)
+values '{"title":"Book Name",
+          "name":"hsadfgsn"}'
+
+select name->'title' from vv   return in ""
+select name->>'title' from vv   return in TEXT
+
+update name set name = name || '{"name":"ven"}'
+update name set name = name - 'name'
+
+-- print normal table as json
+select row_to_json(aa) from aa
+
+-- aggregare
+select json_agg(aa) from aa
+
+-- build json array
+select json_build_array(1,2,3,4,5,'123')   --  1:2,3:4
+select json_build_array('{1,2,3,4,5}',''123123123','123123123','123123123','123123123'')   --  1:'123123123'
+
+select name from vv order by jsonb_array_length(title->''name) desc
+
+-- list keys
+select jsonb_object_key(name) from vv   -- return all the key names
+
+-- Existence Operator
+select * from vv where name->'title' ? "John"   -- only the text is apply for int use containment
+
+-- containment
+select * from vv where name @> '{"id":1}'
+
+select * from vv where name @> '[{"name":"John"}]'          -- start with john   replacement for like
+select * from vv
+where (name->>'id')::integer in (1,2,3,4,5,6)
+where (name->>'id')::integer > 2
+
+```
+### indexing
+- explain analyze select * from vv where name @> '{"title":"john"}'  -- it takes too mush time
+- use GIN Generalised Inverted Index
+- the gin store the row_id of each key word
+- ` create index id_gin_index_name on vv using GIN(name) `
+- but is takes too memory to store
+- so
+- ` create index id_gin_index_name_cool on vv using GIN(name jsonb_path_ops) `
+- also
+- ` create index id_gin_index_name_cool on vv using GIN((name->'title') jsonb_path_ops) `
+- its take less memory
+
+
