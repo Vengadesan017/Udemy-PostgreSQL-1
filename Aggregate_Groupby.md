@@ -32,6 +32,35 @@ select min_salary,count(min_salary),sum(min_salary) from jobs group by 1 order b
 select min_salary,count(min_salary),sum(min_salary),min(min_salary) from jobs group by 1 order by max(min_salary) desc
 
 ```
+### rollup in group by
+- when use grp by with aggregte funtion with two column in grp by
+- becuse if 2 column in grp by it not give the result based on grp
+- but in roll up it give result like grand total , and eaxh column total and conbination tptal when use sum()
+```
+select course_level,course_name,sum(sold_unit) from courses
+group by rollup(course_level,course_name)
+```
+- grouping in aggregate
+- return 0 or 1
+- if null return 1 else 0
+```
+select course_level,course_name,sum(sold_unit),grouping(course_name),grouping(course_level) from courses
+group by rollup(course_level,course_name)
+
+select
+Coalesce(course_level,''),
+course_name,sum(sold_unit),
+case
+  when grouping(course_level) = 1 then 'Grand Total'
+grouping(course_name),
+grouping(course_level)
+from courses
+group by rollup(course_level,course_name)
+
+
+```
+
+
 # Having
 - used with group or aggregate, for checking the condition
 ```
