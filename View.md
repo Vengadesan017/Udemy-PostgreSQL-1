@@ -53,7 +53,7 @@ with cascaded check option     -- it check the c2 as text and also check the par
 
 -- can use insert , update , delete with where
 ```
-- materialized view
+#  materialized view
   - store result of a query physically, then update data periodically
   - cache the result of complex expensive query and then refresh periodically
   - execute the query once and then hold result until refresh
