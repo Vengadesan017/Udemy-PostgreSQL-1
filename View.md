@@ -79,7 +79,7 @@ with cascaded check option     -- it check the c2 as text and also check the par
     select relispopulated from pg_class where relname = 'mv_jobs_quick2'
 
     -- list the materialized view
-    select old::regcall::text
+    select oid::regclass::text
     from  pg_class
     where relkind = 'm'
     ```
