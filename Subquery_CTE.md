@@ -79,4 +79,70 @@ select
 )
 
 ```
-### 
+# CTE - Common Table Expression
+- altername for sub query and joins
+- cte is temporary result taken from a sql statement in variable but we need to call with base code
+- create temp table instead for subquery
+- call multiple times in multple place
+- non recursive type defaully
+- life time of cte is = to life time of query
+- with cte_name (c_list) as ( cte_query_definition ) statement
+```
+with num as 
+(
+select id ,
+(
+case
+   when id < 10 then 'small'
+   else 'lomg'
+end
+ from generate_series(1,15) as id
+)
+select * from num
+
+
+-- logic with pl
+with num as 
+(
+select id ,
+(
+case
+   when id < 10 then 'small'
+   else 'lomg'
+end
+)
+ from generate_series(1,15) as id
+)
+select * from num
+
+-- inset from cte
+with num_move as
+(
+	delete from num
+	return *
+)
+insert into num_table select * from num_muve
+
+
+-- recursive
+- call it selft untile a condition is met
+
+with recursive series (list_num) as
+(
+	-- non recursive
+	select 10 
+	union all
+	-- recursive
+	select list_num + 5 from series where list_num + 5 <= 50
+)
+
+with recursive series (list_num) as
+(
+	-- non recursive
+	select * from generate_series(1,15) as id
+	union all
+	-- recursive
+	select list_num + 5 from series where list_num + 5 <= 50
+)
+select * from series
+  ```
