@@ -20,7 +20,15 @@
 ### use maths to combiine the column
 - select 2+2
 - select a_name, (a_id - a_id) as name from aa  - only for numaric column
+### round
+-  SELECT ROUND(235.415, 0) AS RoundValue; 
+### filter 
+- selectively pass data to aggregates
+``` select job_title,avg(min_salary) filter (where min_salary > 5000) from jobs
+group by job_title
+select job_title,avg(min_salary) filter (where max_salary > 5000) from jobs
 
+group by job_title ```
 # Group by and having(distinct,order by and limit)
 ```
 select min_salary,count(min_salary) from jobs group by 1
@@ -59,7 +67,21 @@ group by rollup(course_level,course_name)
 
 
 ```
+### cube in group by
+- create all possiblity of conbination on columns
+- cube(c1,c2,c3) => (),(c1)...,(c1,c2)...,(c1,c2,c3)
+```
+select course_level,course_name,sum(sold_unit),grouping(course_name),grouping(course_level) from courses
+group by cube(course_level,course_name)
+```
 
+### grouping set
+- create conbination on columns in you given order
+```
+select course_level,course_name,sum(sold_unit) from courses
+group by
+grouping sets((),course_level,course_name)
+```
 
 # Having
 - used with group or aggregate, for checking the condition
