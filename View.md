@@ -53,12 +53,13 @@ with cascaded check option     -- it check the c2 as text and also check the par
 
 -- can use insert , update , delete with where
 ```
-#  materialized view
+#  Materialized view
   - store result of a query physically, then update data periodically
   - cache the result of complex expensive query and then refresh periodically
   - execute the query once and then hold result until refresh
   - create materialized view if not exists veiw name as query with [no] data
-  
+  - no insert,update,delete to view mv_jobs_quick only to table
+  - refresh it with out locking everone else out of it
     ```
     create materialized view if not exists mv_name as 
     view mv_jobs_quick as 
@@ -69,15 +70,17 @@ with cascaded check option     -- it check the c2 as text and also check the par
     
     drop materialized view mv_jobs_quick
     
-    drop materialized view concurrently mv_jobs_quick -- creat temporary updated version of mv, compare two version then perform 
+    drop materialized view concurrently mv_jobs_quick -- create temporary updated version of mv, compare two version then perform  - without locking it
     
-
-    - no insert,update,delete to view mv_jobs_quick only to table
-
-
+    - can not refrest the concurrently materialized view
+    - to refresh create a unique index on mv then refresh the materialized view
+    - because the concurrently opion is taht must unique index od materialized view
     to check updated or not
     select relispopulated from pg_class where relname = 'mv_jobs_quick2'
 
-    
+    -- list the materialized view
+    select old::regcall::text
+    from  pg_class
+    where relkind = 'm'
     ```
 
