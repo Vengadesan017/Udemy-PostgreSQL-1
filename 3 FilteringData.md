@@ -30,6 +30,10 @@ select * from A where a_id not between 4 and 10
 -- like and ilike for patterns
 -- --  % matchs any sequence from 0 to 2+
 -- --  _ for matchs any single character
+-- -- like - case sentitive and faster
+-- -- ilike - case insentitive and lower
+-- like - ~~ , not like !~~
+-- ilike - ~~* , not ilike !~~*
 select 'hello' like 'h%'   --true ==> %o %e% _ello _hell__ %ll_
 select * from A where a_name like 'ram'
 select * from A where a_name like 'ram_'
