@@ -24,11 +24,13 @@
 -  SELECT ROUND(235.415, 0) AS RoundValue; 
 ### filter 
 - selectively pass data to aggregates
-``` select job_title,avg(min_salary) filter (where min_salary > 5000) from jobs
+```
+select job_title,avg(min_salary) filter (where min_salary > 5000) from jobs
 group by job_title
 select job_title,avg(min_salary) filter (where max_salary > 5000) from jobs
 
-group by job_title ```
+group by job_title
+ ```
 # Group by and having(distinct,order by and limit)
 ```
 select min_salary,count(min_salary) from jobs group by 1
