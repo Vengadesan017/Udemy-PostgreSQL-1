@@ -59,8 +59,8 @@ window w_f as (order by year rows between unbounded preceding row and current ro
 
 ### rank
 - give rank based on  window frame
-- rank() - allow dupicates
-- dense_rank()  - no duplicates
+- rank() - allow dupicates  -- 1 2 2 4 5 5 7
+- dense_rank()  - no duplicates -- 1 2 2 3 4 4 5
 ```
 select country, year , export , rank() over(order by export desc) as 'rank' from trades 
 ```
@@ -128,3 +128,26 @@ where row_number between 6 and 10
 | partition    |   ranking |   ntile   |   crank in n partition   |
 | partition    |   ranking |   percent_rank   |   percent rank|
 | partition    |   ranking |   rank   |   rank with gaps   |
+
+### tips
+- function_name over (partition by ... order by ... frame_clause
+### with, order by like table
+- to create your own data, not a table but can use in join 
+```
+with num (c1) as
+(
+  values
+  (1),
+  (2)
+)
+select * from num
+
+
+with temp (c1) as
+(
+  delete from t1 where id in (1,2)
+  returning item
+)
+insert into t2 (item)
+select * from temp
+```
