@@ -45,13 +45,13 @@ select * , array_agg(x) over () as frame_name from generate_series(1,3) as x -- 
 - add column to result set taht has been calculates ao the fly
 ```
 
-select country, year , export , avg (export) over(w_f) as agv_export
+select country, year , export , avg (export) over(w_f)
 from trades
 where country = 'usq'
 window w_f as (order by year)   - windows funtion contain the windows frame
                                  -- this is equal to rows between unbounded preceding row and current row
 
-select country, year , export , avg (export) over w_f as agv_export
+select country, year , export , avg (export) over w_f
 from trades
 where country = 'usq'
 window w_f as (order by year rows between unbounded preceding row and current row) 
@@ -62,31 +62,35 @@ window w_f as (order by year rows between unbounded preceding row and current ro
 - rank() - allow dupicates
 - dense_rank()  - no duplicates
 ```
-select country, year , export , rank() over(order by export desc) as 'rank' as agv_export from trades 
+select country, year , export , rank() over(order by export desc) as 'rank' from trades 
 ```
 
 ### ntile function
 -  split data into equal group based on rank bucket
 ```
-select country, year , export , ntile(4) over(order by export desc) as 'grp' as agv_export from trades create a 4 group 
+select country, year , export , ntile(4) over(order by export desc) from trades create a 4 group 
 ```
 ### lead and lag()
 - move line in result
 - lead - forward
 - lag - backward
 ```
-select country, year , export , lead(export,2) over(order by year desc) as 'rank' as agv_export from trades   -  point the 2 row from current row
-select country, year , export , lag(export,2) over(order by year desc) as 'rank' as agv_export from trades 
+select country, year , export , lead(export,2) over(order by year desc) from trades   -  point the 2 row from current row
+select country, year , export , lag(export,2) over(order by year desc) from trades 
 ```
 
 ### first_value(), nth_value(), last_value()
 - show the n th value
 ```
-select country, year , export , first_value(export) over(order by year desc) as 'rank' as agv_export from trades - show 1 st valu e in all
+select country, year , export , first_value(export) over(order by year desc) from trades - show 1 st valu e in all
 
-select country, year , export , last_value(export) over(order by year desc) as 'rank' as agv_export from trades
+select country, year , export , last_value(export) over(order by year desc)from trades
 - show last value like cursor  using
 -- this is equal to rows between unbounded preceding row and current row
 
-select country, year , export , nth_value(export,2) over(order by year desc) as 'rank' as agv_export from trades  2 nd row from current rows
+select country, year , export , nth_value(export,2) over(order by year desc) from trades  -2 nd row from current rows
 ```
+
+### row_number()
+- return virtual id for each row and it is start from 1
+  ` select country, year , export , row_number() over(order by year desc)  from trades  `
