@@ -72,6 +72,7 @@ select * from A limit 2 offset 4
 - similar like fetch but had some additional features 
 - OFFSET start {ROW or ROWS}
 - FETCH {FIRST or Nest} {Count} {Row or Rows} only
+- is standard then limit in all rdbms
 ```
 select * from A
 fetch first row only
