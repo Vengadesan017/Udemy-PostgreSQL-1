@@ -94,3 +94,37 @@ select country, year , export , nth_value(export,2) over(order by year desc) fro
 ### row_number()
 - return virtual id for each row and it is start from 1
   ` select country, year , export , row_number() over(order by year desc)  from trades  `
+  ` select country, year , export , row_number() over(partition by inport order by year desc)  from trades  `
+- pagination
+```
+  select * from (
+select e.first_name,e.last_name , d.department 
+row_number() over (
+partition by d.department_name,
+order by e.salary
+)
+from employee e
+inner join department d on d.department_id = e.department_id
+) as t 
+where row_number between 6 and 10
+```
+
+### correlation
+- -1 is strong negative , +1 strong positice
+` select country, year , export , corr(inport,export)  from trades  `
+
+
+### windows funtion summary
+| scope    |   type |   function   |   Description   |
+|--|--|--|--|
+| frame    |   row access |   first value   |   value   |
+| frame    |   row access |   last value   |   value   |
+| frame    |   row access |   nth value   |   value   |
+| partition    |   row access |   lead   |   current row after   |
+| partition    |   row access |   lag   |   current row before   |
+| partition    |   row access |   row_number   |   current row number   |
+| partition    |   ranking |   cume_dist   |  cumulative distribution   |
+| partition    |   ranking |   dense_rank   |   rank without gap  |
+| partition    |   ranking |   ntile   |   crank in n partition   |
+| partition    |   ranking |   percent_rank   |   percent rank|
+| partition    |   ranking |   rank   |   rank with gaps   |
