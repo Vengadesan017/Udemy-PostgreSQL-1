@@ -209,3 +209,16 @@ add check (checking in ('Yes','No'))
 - use pgAdmin to create modify table
 - To view table structure , add column
 - To rename delete , change data type of column 
+
+
+# why postgre sql
+- fully open source
+- community
+- create function in sql , plsql , c(very advance)  - build-in
+- addtional language pl/py , pl/perl , pl/tcl pl/java    extention needed
+### server vs application layer
+- best to keep modify the data in server - scalable
+- if in app layer then first fetch then modify then updated db server
+### function vs procedure 
+- function is sql statment , not allow to start or commit , no consistency,   - select fun(if) from xx
+- procedure able to control the transaction , even multiple transaction one by one  -- call procedure_name
