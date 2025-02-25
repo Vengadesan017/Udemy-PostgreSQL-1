@@ -23,7 +23,7 @@ select 2 * 10 ;
 - but give priority for first condition
 ```
 select * from A
-o0rder by a_id
+order by a_id
 
 select * from A
 order by a_id desc
