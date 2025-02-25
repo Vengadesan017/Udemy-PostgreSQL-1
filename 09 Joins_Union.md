@@ -82,7 +82,7 @@ on j.job_id = h.job_id
 - allow duplicate
   ```
   select c1 , c2, 't1' as c3 from t1
-  uniom all
+  union all
   select c1, c2, 't2' as c3 from t2
 
 
