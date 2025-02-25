@@ -6,4 +6,6 @@
   - rollback  - reverse to original state
   - grant
   - revoke
+
 # ACID
+- Atomcity
