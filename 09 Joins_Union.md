@@ -72,7 +72,7 @@ on j.job_id = h.job_id
 - remove duplicate
   ```
   select c1 , c2, 't1' as c3 from t1
-  uniom 
+  union
   select c1, c2, 't2' as c3 from t2
     order bt 1
   ```
@@ -89,7 +89,7 @@ on j.job_id = h.job_id
 
   -- different number of column with null
     select c1 , c2 from t1
-    uniom 
+    union
      select c1, null as c2 from t2
 
   
