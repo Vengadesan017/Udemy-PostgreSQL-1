@@ -9,26 +9,29 @@
   - () open open
   - ` select 
       int4range(1,5),
-      numrange(1.433,6.123,'[]') `
-  - ` select array[1,2,3] , array[12.123::float] `
+      numrange(1.433,6.123,'[]') - "[1,5)" "[1.433,6.123]"`
+  - ` select array[1,2,3] , array[12.123::float]  -{1,2,3} {12.123} `
 ### operator
 ```
 select array[1,2,3] = array[1,2,3]
-select array[1,2,3] < array[1,2,3]
+select array[1,2,3] < array[1,2,3,4]    - true  -- same order with extra nu in right in right side
+select array[1,2,6] < array[1,2,3]    - false
+select array[1,2,5] < array[1,2,5,4]   -true
+select array[1,2,5] < array[1,2,4,5]   - false
 select array[1,2,3] <= array[1,2,3]
 
 -- inclusion operator @> , <@,  &&  a1 is in a1 or not
-select array[1,2,3] @> array[1,2,3]   --in
-select array[1,2,3] <@ array[1,2,3]    -- in
-select array[1,2,3] && array[1,2,3]    -- is overlaped or not
+select array[3] @> array[1,2,3]   --in - false
+select array[3] <@ array[1,2,3]    -- in -  true
+select array[1,2,3] && array[1,2,3]    -- is overlaped or not  - true
 
 select 2 in (1,2,3)
 select 2 not in (1,2,3)
-select 2 = all(array[1,2,3])
+select 2 = all(array[1,2,3])      -- all are 2
 select 2 = all(array[2,2,2])
 select 2 = all(array[2,2,2])
 select 2 = any(array[1,2,3])
-select 2 <> any(array[1,2,3])
+select 2 <> any(array[1,2,3])     
 
 
 ```
@@ -75,7 +78,7 @@ phone text []    -- no need to set dimention like (3)
 )
 
 
--- insert use ' or array function
+-- insert using ' or array function
 insert into vv (phone)
 values
 (array(['123123123','123123123'])),
