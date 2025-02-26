@@ -60,6 +60,7 @@ select array_replace(array[1,2,3],3,6)
 ```
 select string_to_array('1,2,3,5',',')   - , delimiter
 select string_to_array('1,2,3,5',',','5')   - , delimiter - 5 to null
+select id,array_agg(emp_id) from employees group by job_id  -- return all the grped emp_id in winal row as array
 
 
 
